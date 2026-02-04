@@ -1,0 +1,77 @@
+spring:
+  application:
+    name: user-management-api
+
+  profiles:
+    active: dev
+
+  # =========================
+  # JPA / Hibernate
+  # =========================
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true   # 🔥 IMPORTANT
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+  # =========================
+  # Datasource
+  # =========================
+  datasource:
+    url: jdbc:h2:file:./data/userdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # =========================
+  # H2 Console
+  # =========================
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # =========================
+  # SQL Init
+  # =========================
+  sql:
+    init:
+      mode: embedded
+
+# =========================
+# API Documentation
+# =========================
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operationsSorter: method
+
+# =========================
+# Server Configuration
+# =========================
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+
+# =========================
+# Logging
+# =========================
+logging:
+  level:
+    com.example.usermanagement: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
